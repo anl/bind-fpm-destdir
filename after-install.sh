@@ -15,3 +15,6 @@ getent passwd bind >/dev/null 2>&1 ||
 #       chgrp bind /etc/bind/named.conf* || true
 #       chmod g+r /etc/bind/rndc.key /etc/bind/named.conf* || true
 #       chmod g+rwx /var/cache/bind
+
+# Activate init script:
+update-rc.d bind9 defaults
