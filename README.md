@@ -1,5 +1,10 @@
 # README
 
+## What Is This?
+
+Extra files and scripts to add to an FPM-packaged BIND.  Built and tested
+against BIND 9.9.
+
 ## Prereqs
 
 * [fpm](https://github.com/jordansissel/fpm/); I like to do this with an rbenv
