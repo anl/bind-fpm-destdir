@@ -20,8 +20,8 @@ Ruby.
 
 * Package using fpm:
 
-```$ fpm -s dir -t deb -n bind -v 9.9.2-1 -C ~/bind-fpm-destdir-9.9.2-1 \
-> -p bind-VERSION_ARCH.deb \
-> --after-install ~/bind-fpm-destdir-9.9.2-1/after-install.sh \
+```$ fpm -s dir -t deb -n bind -v 9.9.2-1 -C ~/bind-fpm-destdir-9.9.2-1
+> -p bind-VERSION_ARCH.deb
+> --after-install ~/bind-fpm-destdir-9.9.2-1/after-install.sh
 > etc usr
 ```
