@@ -1,9 +1,14 @@
 #!/bin/bash
 
+mkdir /var/cache/bind
+
 getent group bind >/dev/null 2>&1 || addgroup --system bind
 getent passwd bind >/dev/null 2>&1 ||
     adduser --system --home /var/cache/bind --no-create-home \
            --disabled-password --ingroup bind bind
+
+chgrp bind /var/cache/bind
+chmod g+rwx /var/cache/bind
 
 # We're assuming a chroot environment, so no populating/permissioning
 # directories here.  It might look something like this (from Ubuntu postinst
