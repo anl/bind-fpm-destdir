@@ -1,0 +1,6 @@
+# Imported from Ubuntu 12.04:
+# run resolvconf?
+RESOLVCONF=no
+
+# startup options for the server
+OPTIONS="-u bind -t /var/lib/named"
