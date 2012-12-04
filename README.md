@@ -3,7 +3,8 @@
 ## What Is This?
 
 Extra files and scripts to add to an FPM-packaged BIND.  Built and tested
-against BIND 9.9.
+against BIND 9.9.  Probably not very useful to most people, but shared here
+on the off chance it is.
 
 ## Prereqs
 
