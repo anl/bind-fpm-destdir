@@ -25,7 +25,7 @@ RESOLVCONF=no
 
 test -f /etc/default/bind9 && . /etc/default/bind9
 
-test -x /usr/sbin/rndc || exit 0
+test -x /usr/local/sbin/rndc || exit 0
 
 . /lib/lsb/init-functions
 PIDFILE=/var/run/named/named.pid
@@ -54,7 +54,7 @@ case "$1" in
 	chmod 775 /var/run/named
 	chown root:bind /var/run/named >/dev/null 2>&1 || true
 
-	if [ ! -x /usr/sbin/named ]; then
+	if [ ! -x /usr/local/sbin/named ]; then
 	    log_action_msg "named binary missing - not starting"
 	    log_end_msg 1
 	fi
@@ -64,7 +64,7 @@ case "$1" in
 	    log_end_msg 1
 	fi
 
-	if start-stop-daemon --start --oknodo --quiet --exec /usr/sbin/named \
+	if start-stop-daemon --start --oknodo --quiet --exec /usr/local/sbin/named \
 		--pidfile ${PIDFILE} -- $OPTIONS; then
 	    if [ "X$RESOLVCONF" != "Xno" ] && [ -x /sbin/resolvconf ] ; then
 		echo "nameserver 127.0.0.1" | /sbin/resolvconf -a lo.named
@@ -85,10 +85,10 @@ case "$1" in
 	if [ "X$RESOLVCONF" != "Xno" ] && [ -x /sbin/resolvconf ] ; then
 	    /sbin/resolvconf -d lo.named
 	fi
-	pid=$(/usr/sbin/rndc stop -p | awk '/^pid:/ {print $2}') || true
+	pid=$(/usr/local/sbin/rndc stop -p | awk '/^pid:/ {print $2}') || true
 	if [ -z "$pid" ]; then		# no pid found, so either not running, or error
-	    pid=$(pgrep -f ^/usr/sbin/named) || true
-	    start-stop-daemon --stop --oknodo --quiet --exec /usr/sbin/named \
+	    pid=$(pgrep -f ^/usr/local/sbin/named) || true
+	    start-stop-daemon --stop --oknodo --quiet --exec /usr/local/sbin/named \
 		    --pidfile ${PIDFILE} -- $OPTIONS
 	fi
 	if [ -n $pid ]; then
@@ -120,7 +120,7 @@ case "$1" in
 	    log_end_msg 1
 	fi
 
-	/usr/sbin/rndc reload >/dev/null && log_end_msg 0 || log_end_msg 1
+	/usr/local/sbin/rndc reload >/dev/null && log_end_msg 0 || log_end_msg 1
     ;;
 
     restart)
@@ -135,7 +135,7 @@ case "$1" in
     
     status)
     	ret=0
-	status_of_proc -p ${PIDFILE} /usr/sbin/named bind9 2>/dev/null || ret=$?
+	status_of_proc -p ${PIDFILE} /usr/local/sbin/named bind9 2>/dev/null || ret=$?
 	exit $ret
 	;;
 
